@@ -1,0 +1,10 @@
+*.pyc 
+*~ 
+__pycache__ 
+djvenv
+db.sqlite3 
+.env
+.isort.cfg
+manage.py
+one.code-workspace
+.mypy.ini
