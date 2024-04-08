@@ -8,3 +8,5 @@ db.sqlite3
 manage.py
 one.code-workspace
 .mypy.ini
+migrations/
+
