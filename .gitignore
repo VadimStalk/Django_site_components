@@ -9,4 +9,4 @@ manage.py
 one.code-workspace
 .mypy.ini
 migrations/
-
+.vscode/
