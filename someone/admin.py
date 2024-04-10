@@ -22,9 +22,12 @@ class AnalogFilter(admin.SimpleListFilter):
 
 @admin.register(TechStr)
 class TechStrAdmin(admin.ModelAdmin):
-    fields = ['title', 'slug', 'content', 'cat', 'analog'] # Поля для редактирования в режиме редактирования
+    fields = ['title', 'slug', 'content', 'cat', 'analog', 'tags'] # Поля для редактирования в режиме редактирования
     # exclude = ['tags', 'is_published'] # Исключаем поля в режиме редактирования
-    readonly_fields = ['slug'] # Указать поля не для редактирования, только для чтения в режиме редактирования
+    # readonly_fields = ['slug'] # Указать поля не для редактирования, только для чтения в режиме редактирования
+    prepopulated_fields = {'slug':('title', )} # Для автоматического формирования слага, необходимо убрать readonly_fields => slug
+    filter_horizontal = ['tags', ] # Удобнее добавлять теги для записи
+    filter_vertical = ['tags'] # Тоже что и выше
     list_display = ('title', 'time_create', 'is_published', 'cat', 'brief_info')
     list_display_links = ('title', ) # Кликабельные
     ordering = ['-time_create', 'title'] # Сортировка
