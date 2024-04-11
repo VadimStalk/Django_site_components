@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
 from .models import TechStr, Category, TagPost
+from .forms import AddPostForm
 
 menu = [
     {'title':"О сайте", 'url_name': 'about'},
@@ -66,7 +67,21 @@ def show_post(request, post_slug):
 
 def addpage(request):
     # return HttpResponse(f"<h1>Добавить статью</h1>")
-    return render(request, 'someone/addpage.html', {'menu': menu, 'title': 'Добавление статьи'})
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+    else:
+        form = AddPostForm()
+    
+    # form = AddPostForm()
+    data = { 
+        'menu': menu, 
+        'title': 'Добавление статьи',
+        'form': form
+
+        }
+    return render(request, 'someone/addpage.html', data)
 
 def contact(request):
     return HttpResponse(f"<h1>Обратная связь</h1>")
