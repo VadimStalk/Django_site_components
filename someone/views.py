@@ -70,7 +70,12 @@ def addpage(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            # print(form.cleaned_data)
+            try:
+                TechStr.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, "Оштибка добавления поста")
     else:
         form = AddPostForm()
     
